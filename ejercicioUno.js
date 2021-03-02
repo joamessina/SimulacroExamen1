@@ -30,40 +30,32 @@ function probarEjercicio(){
 	let pesoMascota
 	let estadoClinico
 	let tempCorporal
-	let ingresarOtro
-	let perroPesado
-
-	let flag1 = 0
-	let flag2 = 0
-	let flag3 = 0
-
+	let flag1
+	let flag2
+	let flag3
 	let contadorMascotas =0
-	let contadorMascotasEnfermas = 0
 	let contadorOtros = 0
-	let contadorPerros = 0
-	let contadorGatos = 0
-	let perroMaxPesado = 0
+	let contadorPerro = 0
+	let contadorGato= 0
+	let perroMaxPesado= 0
 	let acumPerroYGato=0
+	let contadorEnfermos = 0
+	let ultMascotaTipoOtro;
+	let nombreSinPeloMenorTemp;
+	let menorTempSinPelo;
+	let pYgSobreTotal;
+	let estClinicoMenorCant;
+	let acumuladorPeso=0;
+	let acumuladorTemp=0;
 
-	let bandera
-	var ultMascotaTipoOtro;
+	let mayorPromTempGato;
+	let mayorPromTempOtro;
+	let mayorPromTempPerro;
+	let promDePeso;
 
-	var nombreSinPeloMenorTemp;
-	var menorTempSinPelo;
-	var pYgSobreTotal;
-	var estClinicoMenorCant;
-
-	var acumuladorPeso=0;
-	var acumuladorTemp=0;
-
-	var mayorPromTempGato;
-	var mayorPromTempOtro;
-	var mayorPromTempPerro;
-	var promDePeso;
-
-	var razaGatoLiviano;
-	var nombreGatoLiviano;
-	var pesoGatoLiviano;
+	let razaGatoLiviano;
+	let nombreGatoLiviano;
+	let pesoGatoLiviano;
 	
 	let respuesta
 
@@ -100,7 +92,7 @@ function probarEjercicio(){
 		}
 		
 		pesoMascota = parseInt(prompt("ingrese el peso de su mascota"))
-		while (isNaN(pesoMascota)== true || pesoMascota <0 || pesoMascota < 200) {
+		while (isNaN(pesoMascota)== true) {
 		pesoMascota=parseInt(prompt("Peso Invalido, vuelva a ingresar un peso valido"))	
 		
 		}
@@ -114,7 +106,7 @@ function probarEjercicio(){
 			
 		}
 
-		tempCorporal= parseInt(prompt("ingrese la temperatura corporal de su perro"))
+		tempCorporal= parseInt(prompt("ingrese la temperatura corporal de su mascota"))
 		while (isNaN(tempCorporal)==true) {
 			tempCorporal=parseInt(prompt("Error, ingrese una temperatura corporal correcta"))
 			
@@ -137,7 +129,7 @@ i)El nombre y raza del gato sin pelos mas liviano */
 
 	switch (tipoMascota) {
 		case "perro":
-			contadorPerros++
+			contadorPerro++
 			mayorPromTempGato = acumuladorTemp / contadorGato;	
 			break;
 		case "perro":
@@ -155,20 +147,20 @@ i)El nombre y raza del gato sin pelos mas liviano */
 		contadorEnfermos++;
 	}
 	
-	if (bandera1 == 0) {			
-		pesoMasPesado = pesoMascota;
-		menorTempSinPelo = tempMascota;
+	if (flag1 == 0) {			
+		perroMaxPesado = pesoMascota;
+		menorTempSinPelo = tempCorporal;
 		nombreSinPeloMenorTemp = nombreMascota;
-		bandera1++;
+		flag1++;
 	}
-	else if(pesoMascota > pesoMasPesado){			
-		pesoMasPesado = pesoMascota;
+	else if(pesoMascota > perroMaxPesado){			
+		perroMaxPesado = pesoMascota;
 	}
-	else if (tempMascota < menorTempSinPelo && tipoPelaje == "sin pelo"){
-		menorTempSinPelo = tempMascota;
+	else if (tempCorporal < menorTempSinPelo && tipoPelaje == "sin pelo"){
+		menorTempSinPelo = tempCorporal;
 		nombreSinPeloMenorTemp = nombreMascota;
 	}
-	if(bandera2==0){
+	if(flag2==0){
 		estClinicoMenorCant = estadoClinico;
 	}
 		if(contadorGato > contadorPerro && contadorGato > contadorOtros){
@@ -181,11 +173,11 @@ i)El nombre y raza del gato sin pelos mas liviano */
 			estClinicoMenorCant = estadoClinico;
 		}
 
-	if(bandera3==0 && mascota == "gato" && tipoPelaje == "sin pelo"){
+	if(flag3==0 && mascota == "gato" && tipoPelaje == "sin pelo"){
 		nombreGatoLiviano = nombreMascota;
 		razaGatoLiviano = razaMascota;
 		pesoGatoLiviano = pesoMascota;
-		bandera3++;
+		flag3++;
 	}
 	else if(pesoMascota < pesoGatoLiviano && mascota == "gato" && tipoPelaje == "sin pelo"){
 		nombreGatoLiviano = nombreMascota;
@@ -199,8 +191,8 @@ i)El nombre y raza del gato sin pelos mas liviano */
 acumPerroYGato = contadorPerro + contadorGato;
 promDePeso = acumuladorPeso / contadorMascotas;
 
-if (bandera1 != 0) {
-	document.write("El perro mas pesado pesa :"+pesoMasPesado+"<br>");
+if (flag1 != 0) {
+	document.write("El perro mas pesado pesa :"+perroMaxPesado+"<br>");
 }
 if(contadorEnfermos != 0){
 	porcentajeEnfermos =  contadorMascotas / contadorEnfermos;
@@ -209,7 +201,7 @@ if(contadorEnfermos != 0){
 if(contadorOtros != 0){
 	document.write("El nombre de la ultima mascota del tipo [otro] es :"+ultMascotaTipoOtro+"<br>");
 }
-if(bandera1 != 0){
+if(flag1 != 0){
 	document.write("El animal sin pelo con menor temperatura corporal se llama :"+nombreSinPeloMenorTemp+"<br>");
 }
 
@@ -231,7 +223,7 @@ if(contadorGato != 0 && contadorPerro != 0){
 document.write("El estado clinico de la menor cantidad de mascotas es :"+estClinicoMenorCant+"<br>");
 document.write("El promedio de peso de todas las mascotas es :"+promDePeso+"<br>");
 
-if(bandera3 != 0){
+if(flag3 != 0){
 	document.write("El gato sin pelos mas liviano se llama :"+nombreGatoLiviano+" y es de la raza :"+razaGatoLiviano)
 	}
 }
